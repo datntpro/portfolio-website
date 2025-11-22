@@ -1,7 +1,9 @@
 export async function GET() {
   const config = `backend:
-  name: git-gateway
-  branch: main
+  name: test-repo
+  # For production, change to:
+  # name: git-gateway
+  # branch: main
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"

@@ -1,5 +1,5 @@
 ---
-// Admin page for Decap CMS
+// Admin page for Decap CMS with inline config
 const adminHTML = `<!doctype html>
 <html>
 <head>
@@ -12,6 +12,45 @@ const adminHTML = `<!doctype html>
 <body>
   <!-- Include the script that builds the page and powers Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <!-- CMS Configuration -->
+  <script>
+    window.CMS_MANUAL_INIT = true;
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.CMS) {
+        window.CMS.init({
+          config: {
+            backend: {
+              name: 'github',
+              repo: 'datntpro/unified-portfolio',
+              branch: 'main'
+            },
+            media_folder: 'public/images/uploads',
+            public_folder: '/images/uploads',
+            collections: [
+              {
+                name: 'blog',
+                label: 'Blog Posts',
+                folder: 'src/content/blog',
+                create: true,
+                slug: '{{year}}-{{month}}-{{day}}-{{slug}}',
+                fields: [
+                  { label: 'Title', name: 'title', widget: 'string' },
+                  { label: 'Description', name: 'description', widget: 'text' },
+                  { label: 'Publish Date', name: 'pubDate', widget: 'datetime' },
+                  { label: 'Author', name: 'author', widget: 'string', default: 'Ngô Tiến Đạt' },
+                  { label: 'Featured Image', name: 'image', widget: 'image', required: false },
+                  { label: 'Tags', name: 'tags', widget: 'list', default: ['blog'] },
+                  { label: 'Body', name: 'body', widget: 'markdown' }
+                ]
+              }
+            ]
+          }
+        });
+      }
+    });
+  </script>
   
   <!-- Netlify Identity Redirect -->
   <script>

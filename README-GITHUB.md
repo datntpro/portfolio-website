@@ -89,12 +89,19 @@ unified-portfolio/
 
 Quản lý blog posts qua Decap CMS tại `/admin/`:
 
-1. Login với Netlify Identity hoặc GitHub OAuth
-2. Create/Edit blog posts
-3. Upload images
-4. Publish!
+**Setup (One-time):**
+1. Create GitHub OAuth App
+2. Setup Netlify (free tier) for OAuth handling
+3. Enable Git Gateway
 
-See [DECAP-CMS-SETUP.md](./DECAP-CMS-SETUP.md) for setup instructions.
+See [GITHUB-OAUTH-SETUP.md](./GITHUB-OAUTH-SETUP.md) for detailed instructions.
+
+**Usage:**
+1. Visit `/admin/`
+2. Login with GitHub
+3. Create/Edit blog posts
+4. Upload images
+5. Publish → Auto commit to GitHub!
 
 ### Manual Editing
 
