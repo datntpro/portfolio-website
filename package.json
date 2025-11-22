@@ -1,0 +1,24 @@
+{
+  "name": "unified-portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "deploy": "npm run build && wrangler deploy",
+    "deploy:production": "npm run build && wrangler deploy --env production",
+    "wrangler": "wrangler"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.6.11",
+    "@astrojs/mdx": "^4.3.12",
+    "@tailwindcss/vite": "^4.1.17",
+    "astro": "^5.16.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "wrangler": "^4.50.0"
+  }
+}

@@ -1,0 +1,90 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const blogPosts = await getCollection('blog');
+const sortedPosts = blogPosts.sort((a, b) => 
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<Layout title="Blog - Ngô Tiến Đạt Portfolio">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Blog
+        </span>
+      </h1>
+      <p class="text-xl text-gray-300">
+        Chia sẻ kiến thức về security, development và công nghệ
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Posts -->
+  <section class="container mx-auto px-4 pb-20">
+    <div class="max-w-6xl mx-auto">
+      {sortedPosts.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sortedPosts.map((post) => (
+            <a 
+              href={`/blog/${post.slug}`}
+              class="group bg-slate-900/50 backdrop-blur-lg rounded-xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300 hover:scale-105"
+            >
+              {post.data.image && (
+                <div class="aspect-video bg-gradient-to-br from-cyan-500/20 to-blue-500/20 overflow-hidden">
+                  <img 
+                    src={post.data.image} 
+                    alt={post.data.title}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+              )}
+              
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  {post.data.tags?.map(tag => (
+                    <span class="px-2 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded text-xs text-cyan-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                
+                <h2 class="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition-colors">
+                  {post.data.title}
+                </h2>
+                
+                <p class="text-gray-400 text-sm mb-4 line-clamp-2">
+                  {post.data.description}
+                </p>
+                
+                <div class="flex items-center justify-between text-sm text-gray-500">
+                  <span>{new Date(post.data.pubDate).toLocaleDateString('vi-VN')}</span>
+                  <span class="flex items-center gap-1 text-cyan-400 group-hover:gap-2 transition-all">
+                    Đọc thêm
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="bg-slate-900/30 backdrop-blur-lg rounded-2xl p-12 border border-slate-800 border-dashed text-center">
+          <svg class="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h3 class="text-2xl font-bold mb-2 text-gray-400">Chưa có bài viết</h3>
+          <p class="text-gray-500 mb-6">Các bài viết sẽ được cập nhật sớm...</p>
+          <a href="/admin" class="inline-block bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200">
+            Tạo bài viết đầu tiên
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

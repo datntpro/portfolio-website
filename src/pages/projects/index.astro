@@ -1,0 +1,150 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const projects = [
+  {
+    id: 'security-scanner',
+    title: 'Security Scanning Stack',
+    description: 'Hệ thống quét bảo mật source code tự động với 15+ công cụ opensource hàng đầu thế giới',
+    image: '/projects/security-scanning-stack.jpg',
+    tags: ['Security', 'DevSecOps', 'Docker', 'Python'],
+    features: [
+      'Tích hợp 15+ công cụ scan (Semgrep, Trivy, OWASP ZAP, SonarQube...)',
+      'DefectDojo để quản lý lỗ hổng tập trung',
+      '5 loại scan: SAST, Secret Detection, Container, IaC, SCA',
+      'Báo cáo tiếng Việt tự động',
+      'Docker Compose workflow hoàn chỉnh'
+    ],
+    stats: {
+      tools: '15+',
+      scanTypes: '5',
+      findings: '593+'
+    },
+    detailUrl: '/projects/security-scanner',
+    githubUrl: 'https://github.com/datntpro/security-scanning-stack'
+  }
+];
+---
+
+<Layout title="Dự án - Ngô Tiến Đạt Portfolio">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+          Dự án của tôi
+        </span>
+      </h1>
+      <p class="text-xl text-gray-300">
+        Các công cụ và dự án bảo mật tôi đã xây dựng
+      </p>
+    </div>
+  </section>
+
+  <!-- Projects Grid -->
+  <section class="container mx-auto px-4 pb-20">
+    <div class="max-w-6xl mx-auto space-y-12">
+      {projects.map((project) => (
+        <div class="bg-slate-900/50 backdrop-blur-lg rounded-2xl overflow-hidden border border-slate-800 hover:border-cyan-500/50 transition-all duration-300">
+          <div class="grid md:grid-cols-2 gap-8 p-8">
+            <!-- Project Image/Icon -->
+            <div class="flex items-center justify-center bg-gradient-to-br from-red-500/10 to-orange-500/10 rounded-xl p-12 border border-red-500/20">
+              <div class="text-center">
+                <div class="w-24 h-24 mx-auto bg-gradient-to-br from-red-500 to-orange-500 rounded-2xl flex items-center justify-center mb-4 shadow-2xl">
+                  <svg class="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  </svg>
+                </div>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div class="text-2xl font-bold text-red-400">{project.stats.tools}</div>
+                    <div class="text-xs text-gray-400">Tools</div>
+                  </div>
+                  <div>
+                    <div class="text-2xl font-bold text-orange-400">{project.stats.scanTypes}</div>
+                    <div class="text-xs text-gray-400">Scan Types</div>
+                  </div>
+                  <div>
+                    <div class="text-2xl font-bold text-yellow-400">{project.stats.findings}</div>
+                    <div class="text-xs text-gray-400">Findings</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Info -->
+            <div class="flex flex-col justify-between">
+              <div>
+                <h2 class="text-3xl font-bold mb-4 text-cyan-400">
+                  {project.title}
+                </h2>
+                <p class="text-gray-300 mb-6">
+                  {project.description}
+                </p>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                  {project.tags.map(tag => (
+                    <span class="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-sm text-cyan-300">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <!-- Features -->
+                <div class="mb-6">
+                  <h3 class="font-semibold mb-3 text-gray-200">Tính năng chính:</h3>
+                  <ul class="space-y-2">
+                    {project.features.map(feature => (
+                      <li class="flex items-start gap-2 text-sm text-gray-400">
+                        <svg class="w-5 h-5 text-cyan-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Links -->
+              <div class="flex gap-4">
+                <a 
+                  href={project.detailUrl}
+                  class="flex-1 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                  Chi tiết
+                </a>
+                <a 
+                  href={project.githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="flex-1 bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- More Projects Coming Soon -->
+    <div class="max-w-6xl mx-auto mt-12">
+      <div class="bg-slate-900/30 backdrop-blur-lg rounded-2xl p-12 border border-slate-800 border-dashed text-center">
+        <svg class="w-16 h-16 mx-auto mb-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        <h3 class="text-2xl font-bold mb-2 text-gray-400">Thêm dự án sắp tới</h3>
+        <p class="text-gray-500">Đang phát triển các công cụ bảo mật mới...</p>
+      </div>
+    </div>
+  </section>
+</Layout>

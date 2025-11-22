@@ -1,0 +1,41 @@
+name = "unified-portfolio"
+main = "./dist/_worker.js"
+compatibility_date = "2024-11-22"
+
+# Account ID - Update this with your Cloudflare Account ID
+# Find it at: https://dash.cloudflare.com/ → Workers & Pages → Overview
+# account_id = "your-account-id-here"
+
+# Workers configuration
+workers_dev = true
+
+# Routes (optional - for custom domain)
+# routes = [
+#   { pattern = "datngotien.dev/*", zone_name = "datngotien.dev" }
+# ]
+
+# Assets configuration
+[site]
+bucket = "./dist"
+
+# Environment variables (optional)
+# [vars]
+# ENVIRONMENT = "production"
+
+# KV Namespaces (optional - for CMS or caching)
+# [[kv_namespaces]]
+# binding = "SESSION"
+# id = "your-kv-namespace-id"
+
+# Limits
+[limits]
+cpu_ms = 50
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = "."
+watch_dirs = ["src"]
+
+# Compatibility flags
+compatibility_flags = []
